@@ -1,0 +1,21 @@
+# Visual Studio / .NET
+**/bin/
+**/obj/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+
+# Office temporary lock files
+~$*
+
+# OS files
+Thumbs.db
+[Dd]esktop.ini
+.DS_Store

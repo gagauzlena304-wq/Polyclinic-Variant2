@@ -1,0 +1,81 @@
+<Window x:Class="Polyclinic.UI.AppointmentHistoryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="История посещений и диагнозов" 
+        Height="650" Width="950" 
+        WindowStartupLocation="CenterOwner"
+        Background="{StaticResource BackgroundBrush}">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок окна -->
+        <TextBlock x:Name="TitleTextBlock" 
+                   Text="История приёмов пациента" 
+                   FontSize="20" 
+                   FontWeight="Bold" 
+                   Foreground="{StaticResource SecondaryBrush}" 
+                   Margin="0,0,0,12"/>
+
+        <!-- Информационная карточка скидки и визитов пациента (Модуль 2) -->
+        <Border Grid.Row="1" Background="White" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" CornerRadius="8" Padding="16" Margin="0,0,0,16">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel>
+                    <TextBlock x:Name="PatientInfoTextBlock" Text="ФИО: Сидоров Алексей Михайлович" FontSize="15" FontWeight="Bold" Foreground="#0F172A"/>
+                    <TextBlock x:Name="PatientMetaTextBlock" Text="Полис: 1111222233334444 | Телефон: +7 (916) 123-45-67" FontSize="12" Foreground="#64748B" Margin="0,4,0,0"/>
+                </StackPanel>
+
+                <!-- Статистика скидки -->
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Border Background="#F0FDF4" BorderBrush="#BBF7D0" BorderThickness="1" CornerRadius="6" Padding="12,6" Margin="0,0,12,0">
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Визитов за 12 мес." FontSize="11" Foreground="#15803D" HorizontalAlignment="Center"/>
+                            <TextBlock x:Name="VisitsCountTextBlock" Text="5 визитов" FontSize="16" FontWeight="Bold" Foreground="#166534" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="#EFF6FF" BorderBrush="#BFDBFE" BorderThickness="1" CornerRadius="6" Padding="12,6">
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Текущая скидка" FontSize="11" Foreground="#1D4ED8" HorizontalAlignment="Center"/>
+                            <TextBlock x:Name="DiscountTextBlock" Text="5%" FontSize="16" FontWeight="Bold" Foreground="#1E40AF" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Таблица истории посещений -->
+        <DataGrid x:Name="AppointmentsGrid" Grid.Row="2" SelectionChanged="AppointmentsGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Дата и время" Binding="{Binding FormattedDate}" Width="120"/>
+                <DataGridTextColumn Header="Врач" Binding="{Binding DoctorName}" Width="180"/>
+                <DataGridTextColumn Header="Специализация" Binding="{Binding SpecializationName}" Width="120"/>
+                <DataGridTextColumn Header="Каб." Binding="{Binding Cabinet}" Width="50"/>
+                <DataGridTextColumn Header="Диагноз" Binding="{Binding Diagnosis}" Width="160"/>
+                <DataGridTextColumn Header="Жалобы и рекомендации" Binding="{Binding Recommendations}" Width="*"/>
+                <DataGridTextColumn Header="Базовая цена" Binding="{Binding FormattedBaseCost}" Width="95"/>
+                <DataGridTextColumn Header="Скидка" Binding="{Binding FormattedDiscount}" Width="65"/>
+                <DataGridTextColumn Header="К оплате" Binding="{Binding FormattedFinalCost}" Width="95"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Нижняя панель действий -->
+        <Grid Grid.Row="3" Margin="0,16,0,0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <Button Content="+ Новый приём" Width="140" Click="AddAppointmentButton_Click"/>
+                <Button Content="🔄 Обновить" Style="{StaticResource SecondaryButton}" Width="110" Click="RefreshButton_Click"/>
+            </StackPanel>
+
+            <Button Content="Назад к списку" Style="{StaticResource SecondaryButton}" HorizontalAlignment="Right" Width="130" Click="BackButton_Click"/>
+        </Grid>
+    </Grid>
+</Window>

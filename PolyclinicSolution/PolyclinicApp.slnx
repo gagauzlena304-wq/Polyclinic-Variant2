@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Polyclinic.Core/Polyclinic.Core.csproj" />
+  <Project Path="Polyclinic.Data/Polyclinic.Data.csproj" />
+  <Project Path="Polyclinic.Tests/Polyclinic.Tests.csproj" />
+  <Project Path="Polyclinic.UI/Polyclinic.UI.csproj" />
+</Solution>

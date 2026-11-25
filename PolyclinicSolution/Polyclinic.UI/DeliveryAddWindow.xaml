@@ -1,0 +1,51 @@
+<Window x:Class="Polyclinic.UI.DeliveryAddWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Регистрация поставки медикаментов" 
+        Height="480" Width="480" 
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Background="{StaticResource BackgroundBrush}">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Новая поставка медикаментов" FontSize="18" FontWeight="Bold" Foreground="{StaticResource SecondaryBrush}" Margin="0,0,0,16"/>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="0,0,10,0">
+                <!-- Партнер-поставщик -->
+                <TextBlock Text="Партнер (Поставщик): *" FontWeight="SemiBold" Margin="0,4,0,2"/>
+                <ComboBox x:Name="PartnerComboBox" DisplayMemberPath="PartnerName" SelectedValuePath="PartnerId" Margin="0,0,0,10"/>
+
+                <!-- Тип препарата -->
+                <TextBlock Text="Тип препарата: *" FontWeight="SemiBold" Margin="0,4,0,2"/>
+                <ComboBox x:Name="MaterialTypeComboBox" DisplayMemberPath="MaterialName" SelectedValuePath="MaterialTypeId" Margin="0,0,0,10"/>
+
+                <!-- Наименование лекарства -->
+                <TextBlock Text="Наименование препарата: *" FontWeight="SemiBold" Margin="0,4,0,2"/>
+                <TextBox x:Name="MedicineNameTextBox" Margin="0,0,0,10"/>
+
+                <!-- Количество -->
+                <TextBlock Text="Количество (единиц / упаковок): *" FontWeight="SemiBold" Margin="0,4,0,2"/>
+                <TextBox x:Name="QuantityTextBox" Text="100" Margin="0,0,0,10"/>
+
+                <!-- Дата поставки -->
+                <TextBlock Text="Дата поставки: *" FontWeight="SemiBold" Margin="0,4,0,2"/>
+                <DatePicker x:Name="DeliveryDatePicker" Margin="0,0,0,10"/>
+
+                <!-- Номер партии -->
+                <TextBlock Text="Номер производственной партии: *" FontWeight="SemiBold" Margin="0,4,0,2"/>
+                <TextBox x:Name="BatchNumberTextBox" Margin="0,0,0,10"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
+            <Button Content="Отмена" Style="{StaticResource SecondaryButton}" Width="100" Click="CancelButton_Click"/>
+            <Button Content="Зарегистрировать" Width="150" Click="SaveButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
