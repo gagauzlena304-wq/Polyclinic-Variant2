@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Поликлиника — Информационная система (Вариант 2)</title>
+  <title>МИС «Поликлиника» — Демонстрационный проект для клиента</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #0284c7;
-      --primary-dark: #0369a1;
+      --primary-hover: #0369a1;
       --primary-light: #e0f2fe;
+      --secondary: #0f172a;
       --text: #0f172a;
       --text-muted: #64748b;
       --bg: #f8fafc;
@@ -21,16 +22,12 @@
       --warning: #d97706;
       --danger: #dc2626;
       --radius: 12px;
-      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
-      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+      --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.07);
+      --shadow-lg: 0 12px 24px -4px rgb(0 0 0 / 0.12), 0 4px 6px -2px rgb(0 0 0 / 0.05);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg);
@@ -38,47 +35,45 @@
       line-height: 1.6;
     }
 
+    /* Top Hero Header */
     header {
       background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
       color: white;
-      padding: 3rem 1.5rem;
+      padding: 3.5rem 1.5rem 4rem 1.5rem;
       text-align: center;
       box-shadow: var(--shadow-lg);
     }
-
     header h1 {
-      font-size: 2.25rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.75rem;
     }
-
     header p {
-      font-size: 1.125rem;
+      font-size: 1.15rem;
       color: #bae6fd;
-      max-width: 700px;
+      max-width: 760px;
       margin: 0 auto 1.5rem auto;
     }
-
-    .badge-container {
+    .badge-bar {
       display: flex;
       gap: 0.75rem;
       justify-content: center;
       flex-wrap: wrap;
     }
-
     .badge {
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.18);
       backdrop-filter: blur(8px);
-      padding: 0.4rem 0.85rem;
+      padding: 0.4rem 0.9rem;
       border-radius: 9999px;
-      font-size: 0.875rem;
-      font-weight: 500;
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.3);
     }
 
     main {
-      max-width: 1100px;
-      margin: -2rem auto 4rem auto;
+      max-width: 1140px;
+      margin: -2.5rem auto 4rem auto;
       padding: 0 1.5rem;
     }
 
@@ -90,148 +85,231 @@
       margin-bottom: 2rem;
       box-shadow: var(--shadow);
     }
-
     .card h2 {
-      font-size: 1.5rem;
+      font-size: 1.45rem;
       color: var(--text);
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      border-bottom: 2px solid var(--primary-light);
-      padding-bottom: 0.5rem;
     }
 
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.5rem;
-    }
-
-    /* Calculator Styles */
-    .calc-box {
-      background: #f1f5f9;
-      border-radius: 8px;
-      padding: 1.5rem;
-    }
-
-    .form-group {
-      margin-bottom: 1rem;
-    }
-
-    label {
-      display: block;
-      font-size: 0.875rem;
-      font-weight: 600;
-      margin-bottom: 0.35rem;
-      color: var(--text);
-    }
-
-    input, select {
-      width: 100%;
-      padding: 0.65rem 0.85rem;
-      border: 1px solid #cbd5e1;
-      border-radius: 6px;
-      font-size: 0.95rem;
-      background: white;
-      transition: border-color 0.15s ease;
-    }
-
-    input:focus, select:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
-    }
-
-    .result-box {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.25rem;
-      margin-top: 1rem;
-      text-align: center;
-    }
-
-    .result-val {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    .formula-badge {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
-      background: #0f172a;
-      color: #38bdf8;
-      padding: 0.75rem 1rem;
-      border-radius: 6px;
-      margin-top: 0.75rem;
-      display: block;
-      overflow-x: auto;
-    }
-
-    /* Table Styles */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
-      font-size: 0.9rem;
-    }
-
-    th, td {
-      padding: 0.75rem 1rem;
-      text-align: left;
-      border-bottom: 1px solid var(--border);
-    }
-
-    th {
-      background: #f8fafc;
-      font-weight: 600;
-      color: var(--text-muted);
-    }
-
-    tr:hover td {
-      background: #f1f5f9;
-    }
-
-    /* Links / Buttons */
+    /* Action Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.65rem 1.25rem;
-      border-radius: 6px;
+      padding: 0.7rem 1.35rem;
+      border-radius: 8px;
       font-weight: 600;
       font-size: 0.9rem;
       text-decoration: none;
-      transition: all 0.2s;
+      transition: all 0.2s ease;
       cursor: pointer;
       border: none;
     }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: var(--primary-hover); transform: translateY(-1px); }
+    .btn-secondary { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; }
+    .btn-secondary:hover { background: #e2e8f0; }
+    .btn-danger { background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5; }
+    .btn-success { background: #dcfce7; color: #16a34a; border: 1px solid #86efac; }
 
-    .btn-primary {
-      background: var(--primary);
+    /* Interactive Live Demo App Frame */
+    .demo-window {
+      background: white;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      margin-bottom: 2.5rem;
+    }
+    .window-header {
+      background: #0284c7;
       color: white;
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .window-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .window-controls {
+      display: flex;
+      gap: 0.4rem;
+    }
+    .w-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+    }
+    .w-close { background: #f87171; }
+    .w-min { background: #facc15; }
+    .w-max { background: #4ade80; }
+
+    /* Window Nav Tabs */
+    .tab-bar {
+      display: flex;
+      background: #f1f5f9;
+      border-bottom: 1px solid var(--border);
+      padding: 0.5rem 1rem 0 1rem;
+      gap: 0.25rem;
+    }
+    .tab-btn {
+      padding: 0.6rem 1.1rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #64748b;
+      background: transparent;
+      border: 1px solid transparent;
+      border-bottom: none;
+      border-radius: 8px 8px 0 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .tab-btn.active {
+      background: white;
+      color: var(--primary);
+      border-color: var(--border);
     }
 
-    .btn-primary:hover {
-      background: var(--primary-dark);
+    .tab-content {
+      padding: 1.5rem;
+      display: none;
+    }
+    .tab-content.active { display: block; }
+
+    /* Toolbar inside App */
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .search-input {
+      padding: 0.6rem 0.9rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      width: 320px;
+      font-size: 0.9rem;
     }
 
-    .btn-secondary {
-      background: #e2e8f0;
-      color: var(--text);
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
     }
+    th, td {
+      padding: 0.75rem 0.9rem;
+      text-align: left;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    th {
+      background: #f8fafc;
+      color: #475569;
+      font-weight: 600;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    tr:hover td { background: #f8fafc; }
+    .pill {
+      display: inline-block;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.78rem;
+      text-align: center;
+    }
+    .pill-0 { background: #f1f5f9; color: #475569; }
+    .pill-5 { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+    .pill-10 { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
+    .pill-15 { background: #faf5ff; color: #7e22ce; border: 1px solid #e9d5ff; }
 
-    .btn-secondary:hover {
-      background: #cbd5e1;
+    /* Modals */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 1rem;
     }
+    .modal-overlay.open { display: flex; }
+    .modal-card {
+      background: white;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 540px;
+      box-shadow: var(--shadow-lg);
+      padding: 1.75rem;
+      animation: modalIn 0.2s ease-out;
+    }
+    @keyframes modalIn {
+      from { transform: translateY(20px) scale(0.96); opacity: 0; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.75rem;
+    }
+    .modal-title { font-size: 1.25rem; font-weight: 700; color: #0f172a; }
+    .form-row { margin-bottom: 0.85rem; }
+    .form-row label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem; }
+    .form-row input, .form-row select, .form-row textarea {
+      width: 100%;
+      padding: 0.6rem 0.8rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 0.9rem;
+    }
+    .hint { font-size: 0.75rem; color: #64748b; margin-top: 0.25rem; }
+    .hint.ok { color: #16a34a; font-weight: 600; }
+    .hint.warn { color: #d97706; font-weight: 600; }
+
+    /* Calculators inside demo */
+    .grid-calc {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .calc-panel {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+    .res-block {
+      background: white;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .res-val { font-size: 1.85rem; font-weight: 700; color: var(--primary); }
 
     footer {
       text-align: center;
-      padding: 2rem;
+      padding: 2.5rem 1rem;
       color: var(--text-muted);
-      font-size: 0.875rem;
+      font-size: 0.88rem;
     }
   </style>
 </head>
@@ -239,212 +317,470 @@
 
   <header>
     <h1>🏥 Информационная система «Поликлиника»</h1>
-    <p>Реализация заданий демонстрационного экзамена (Вариант № 2): База данных, алгоритмы скидки, WPF-интерфейс учета пациентов и интеграция с поставщиками медикаментов.</p>
-    <div class="badge-container">
-      <span class="badge">✓ Модуль 1: БД (3NF, ER, SQL)</span>
-      <span class="badge">✓ Модуль 2: Алгоритм скидки</span>
-      <span class="badge">✓ Модуль 3: WPF интерфейс</span>
-      <span class="badge">✓ Модуль 4: Интеграция и расчет лекарств</span>
-      <span class="badge">✓ 37 тестов xUnit: Пройдены</span>
+    <p>Полнофункциональный программный комплекс для амбулаторно-поликлинических учреждений (Демоэкзамен, Вариант № 2). Автоматизация регистратуры, электронная медкарта, система лояльности и планирование закупок медикаментов.</p>
+    <div class="badge-bar">
+      <span class="badge">✓ Модуль 1: База данных (3NF, ER-диаграмма, SQL)</span>
+      <span class="badge">✓ Модуль 2: Алгоритм индивидуальной скидки (0%-15%)</span>
+      <span class="badge">✓ Модуль 3: WPF интерфейс и валидация</span>
+      <span class="badge">✓ Модуль 4: Интеграция с поставщиками и расчет лекарств</span>
+      <span class="badge">✓ 37 автоматизированных тестов xUnit</span>
     </div>
   </header>
 
   <main>
-    <!-- Документы и исходный код -->
+    <!-- Пакет материалов для заказчика -->
     <section class="card">
-      <h2>📁 Документация и материалы проекта</h2>
-      <p style="margin-bottom: 1rem;">Все материалы структурированы и готовы к проверке экспертной комиссией:</p>
-      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-        <a class="btn btn-primary" href="Инструкция.docx" download>📄 Скачать Инструкция.docx</a>
-        <a class="btn btn-secondary" href="Database/ER_Diagram.pdf" target="_blank">📊 Открыть ER_Diagram.pdf</a>
-        <a class="btn btn-secondary" href="Database/Polyclinic_DB.sql" download>💾 Скачать Polyclinic_DB.sql</a>
-        <a class="btn btn-secondary" href="README.md" target="_blank">📖 README.md</a>
+      <h2>📦 Материалы демонстрационного проекта для клиента</h2>
+      <p style="margin-bottom: 1.25rem; color: var(--text-muted);">
+        Все отчетные файлы скомпилированы и подготовлены для демонстрации экспертам, заказчикам и членам комиссии:
+      </p>
+      <div style="display: flex; gap: 0.85rem; flex-wrap: wrap;">
+        <a class="btn btn-primary" href="Инструкция.docx" download>📄 Инструкция.docx (Полный отчет)</a>
+        <a class="btn btn-secondary" href="Demo/Презентация_для_клиента.docx" download>📊 Презентация_для_клиента.docx</a>
+        <a class="btn btn-secondary" href="Database/ER_Diagram.pdf" target="_blank">📈 ER-диаграмма (Векторный PDF)</a>
+        <a class="btn btn-secondary" href="Database/Polyclinic_DB.sql" download>💾 SQL-скрипт (Polyclinic_DB.sql)</a>
+        <a class="btn btn-secondary" href="Demo/Сценарий_демонстрации_клиенту.md" target="_blank">🎬 Сценарий живого показа (5 мин)</a>
       </div>
     </section>
 
-    <!-- Интерактивные калькуляторы -->
-    <div class="grid-2">
-      <!-- Модуль 2: Скидка -->
-      <section class="card">
-        <h2>🏷️ Модуль 2: Калькулятор скидки</h2>
-        <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1rem;">
-          Скидка рассчитывается на основе числа посещений за последние 12 месяцев.
-        </p>
-        <div class="calc-box">
-          <div class="form-group">
-            <label for="visitsInput">Количество визитов за последние 12 месяцев:</label>
-            <input type="number" id="visitsInput" min="0" value="5" oninput="calculateDiscount()">
-          </div>
-          <div class="form-group">
-            <label for="baseCostInput">Базовая стоимость услуги (₽):</label>
-            <input type="number" id="baseCostInput" min="0" value="1500" oninput="calculateDiscount()">
-          </div>
-          <div class="result-box">
-            <div style="font-size: 0.875rem; color: var(--text-muted);">Размер индивидуальной скидки:</div>
-            <div class="result-val" id="discountResult">5%</div>
-            <div style="margin-top: 0.5rem; font-size: 1.1rem; font-weight: 600;">
-              Итого к оплате: <span id="finalCostResult" style="color: var(--primary);">1 425.00 ₽</span>
-            </div>
+    <!-- ИНТЕРАКТИВНОЕ ОКНО ДЕМОНСТРАЦИИ СИСТЕМЫ (LIVE DEMO) -->
+    <div class="demo-window">
+      <div class="window-header">
+        <div class="window-title">
+          <span>🏥</span> Информационная система «Поликлиника» — Интерактивный показ
+        </div>
+        <div class="window-controls">
+          <div class="w-dot w-min"></div>
+          <div class="w-dot w-max"></div>
+          <div class="w-dot w-close"></div>
+        </div>
+      </div>
+
+      <!-- Вкладки окна -->
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab('tab-patients')">👥 Реестр пациентов</button>
+        <button class="tab-btn" onclick="switchTab('tab-doctors')">👨‍⚕️ Врачи и кабинеты</button>
+        <button class="tab-btn" onclick="switchTab('tab-supplies')">📦 Поставки партнеров</button>
+        <button class="tab-btn" onclick="switchTab('tab-calc')">🧮 Расчет медикаментов</button>
+      </div>
+
+      <!-- ВКЛАДКА 1: ПАЦИЕНТЫ -->
+      <div id="tab-patients" class="tab-content active">
+        <div class="toolbar">
+          <input type="text" id="patientSearch" class="search-input" placeholder="🔍 Поиск по ФИО, полису или телефону..." oninput="filterPatients()">
+          <div style="display: flex; gap: 0.5rem;">
+            <button class="btn btn-primary" onclick="openAddPatientModal()">+ Добавить пациента</button>
+            <button class="btn btn-secondary" onclick="renderPatients()">🔄 Обновить</button>
           </div>
         </div>
-        <table style="margin-top: 1rem;">
+
+        <div style="overflow-x: auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>ФИО Пациента</th>
+                <th>Дата рожд.</th>
+                <th>Пол</th>
+                <th>Полис ОМС</th>
+                <th>Телефон</th>
+                <th>Визитов (год)</th>
+                <th>Скидка</th>
+                <th>Действия</th>
+              </tr>
+            </thead>
+            <tbody id="patientsTableBody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ВКЛАДКА 2: ВРАЧИ -->
+      <div id="tab-doctors" class="tab-content">
+        <p style="margin-bottom: 1rem; color: var(--text-muted);">Реестр медицинского персонала и распределение кабинетов (Модуль 1):</p>
+        <table>
           <thead>
-            <tr><th>Визиты за 12 мес.</th><th>Скидка</th><th>Статус</th></tr>
+            <tr><th>ID</th><th>ФИО Врача</th><th>Специализация</th><th>Кабинет</th><th>Телефон</th><th>Статус</th></tr>
           </thead>
           <tbody>
-            <tr><td>до 3 визитов</td><td><strong>0%</strong></td><td>Базовый</td></tr>
-            <tr><td>4–7 визитов</td><td><strong>5%</strong></td><td>Постоянный</td></tr>
-            <tr><td>8–15 визитов</td><td><strong>10%</strong></td><td>Активный</td></tr>
-            <tr><td>более 15 визитов</td><td><strong>15%</strong></td><td>VIP</td></tr>
+            <tr><td>1</td><td>Иванов Сергей Петрович</td><td>Терапевт</td><td>Каб. 101</td><td>+7 (900) 111-22-33</td><td><span class="pill pill-10">Ведет прием</span></td></tr>
+            <tr><td>2</td><td>Смирнова Елена Васильевна</td><td>Кардиолог</td><td>Каб. 205</td><td>+7 (900) 222-33-44</td><td><span class="pill pill-10">Ведет прием</span></td></tr>
+            <tr><td>3</td><td>Кузнецов Михаил Александрович</td><td>Невролог</td><td>Каб. 312</td><td>+7 (900) 333-44-55</td><td><span class="pill pill-10">Ведет прием</span></td></tr>
+            <tr><td>4</td><td>Попова Ольга Дмитриевна</td><td>Хирург</td><td>Каб. 115</td><td>+7 (900) 444-55-66</td><td><span class="pill pill-10">Ведет прием</span></td></tr>
+            <tr><td>5</td><td>Васильев Андрей Николаевич</td><td>Офтальмолог</td><td>Каб. 402</td><td>+7 (900) 555-66-77</td><td><span class="pill pill-10">Ведет прием</span></td></tr>
           </tbody>
         </table>
-      </section>
+      </div>
 
-      <!-- Модуль 4: Расчет медикаментов -->
-      <section class="card">
-        <h2>💊 Модуль 4: Расчет препаратов</h2>
-        <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1rem;">
-          Расчет лекарств с учетом дозировки, дней, пациентов, типа лечения и брака.
-        </p>
-        <div class="calc-box">
-          <div class="form-group">
-            <label for="treatmentTypeSelect">Тип лечения (product_type_id):</label>
-            <select id="treatmentTypeSelect" onchange="calculateMedicine()">
-              <option value="1.05">1. Антибактериальная терапия (К = 1.05)</option>
-              <option value="1.10" selected>2. Инфузионная терапия (К = 1.10)</option>
-              <option value="1.00">3. Физиотерапия и ингаляции (К = 1.00)</option>
-              <option value="1.08">4. Инъекционная терапия (К = 1.08)</option>
-              <option value="1.15">5. Химиотерапия и таргетная (К = 1.15)</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="materialTypeSelect">Тип препарата (material_type_id):</label>
-            <select id="materialTypeSelect" onchange="calculateMedicine()">
-              <option value="0.035">1. Антибиотик (брак: 3.5%)</option>
-              <option value="0.020" selected>2. Физраствор 0.9% (брак: 2.0%)</option>
-              <option value="0.025">3. Раствор глюкозы (брак: 2.5%)</option>
-              <option value="0.040">4. Обезболивающее (брак: 4.0%)</option>
-              <option value="0.015">5. Витаминный комплекс (брак: 1.5%)</option>
-            </select>
-          </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem;">
-            <div class="form-group">
-              <label for="qtyInput">Пациентов:</label>
-              <input type="number" id="qtyInput" min="1" value="10" oninput="calculateMedicine()">
+      <!-- ВКЛАДКА 3: ПОСТАВКИ -->
+      <div id="tab-supplies" class="tab-content">
+        <p style="margin-bottom: 1rem; color: var(--text-muted);">Журнал взаимодействия с фармацевтическими дистрибьюторами (Модуль 4):</p>
+        <table>
+          <thead>
+            <tr><th>Партия</th><th>Препарат</th><th>Тип материала</th><th>Количество</th><th>Дата поставки</th><th>Партнер (Поставщик)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>BAT-2026-091</td><td>Цефтриаксон 1.0 г пор.</td><td>Антибиотик</td><td>500 шт.</td><td>05.10.2026</td><td>АО «Фармстандарт»</td></tr>
+            <tr><td>SOL-77412</td><td>Натрия хлорид 0.9% 500 мл</td><td>Физраствор</td><td>1 200 шт.</td><td>12.10.2026</td><td>ООО «Гротекс» (Solopharm)</td></tr>
+            <tr><td>BIO-44910</td><td>Кеторолак 30 мг/мл амп.</td><td>Обезболивающее</td><td>350 шт.</td><td>20.10.2026</td><td>ЗАО «Биокад»</td></tr>
+            <tr><td>PRT-11029</td><td>Глюкоза р-р 5% 400 мл</td><td>Раствор глюкозы</td><td>800 шт.</td><td>01.11.2026</td><td>ООО «ПРОТЕК»</td></tr>
+            <tr><td>RPH-33018</td><td>Амоксициллин + клавуланат</td><td>Антибиотик</td><td>450 шт.</td><td>08.11.2026</td><td>АО «Р-Фарм»</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ВКЛАДКА 4: КАЛЬКУЛЯТОР -->
+      <div id="tab-calc" class="tab-content">
+        <div class="grid-calc">
+          <div class="calc-panel">
+            <h3 style="margin-bottom: 0.75rem; font-size: 1.1rem;">Параметры назначения курса (Модуль 4)</h3>
+            <div class="form-row">
+              <label>Тип лечения (product_type_id):</label>
+              <select id="simTreatment" onchange="runSimCalc()">
+                <option value="1.05">1. Антибактериальная терапия (К = 1.05)</option>
+                <option value="1.10" selected>2. Инфузионная терапия (К = 1.10)</option>
+                <option value="1.00">3. Физиотерапия и ингаляции (К = 1.00)</option>
+                <option value="1.08">4. Инъекционная терапия (К = 1.08)</option>
+              </select>
             </div>
-            <div class="form-group">
-              <label for="p1Input">param1 (мл):</label>
-              <input type="number" id="p1Input" min="1" value="200" oninput="calculateMedicine()">
+            <div class="form-row">
+              <label>Тип препарата (material_type_id):</label>
+              <select id="simMaterial" onchange="runSimCalc()">
+                <option value="0.035">1. Антибиотик (брак: 3.5%)</option>
+                <option value="0.020" selected>2. Физраствор (брак: 2.0%)</option>
+                <option value="0.025">3. Раствор глюкозы (брак: 2.5%)</option>
+                <option value="0.040">4. Обезболивающее (брак: 4.0%)</option>
+              </select>
             </div>
-            <div class="form-group">
-              <label for="p2Input">param2 (дней):</label>
-              <input type="number" id="p2Input" min="1" value="5" oninput="calculateMedicine()">
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem;">
+              <div class="form-row">
+                <label>Пациентов:</label>
+                <input type="number" id="simQty" value="10" min="1" oninput="runSimCalc()">
+              </div>
+              <div class="form-row">
+                <label>param1 (доза):</label>
+                <input type="number" id="simP1" value="200" min="1" oninput="runSimCalc()">
+              </div>
+              <div class="form-row">
+                <label>param2 (дней):</label>
+                <input type="number" id="simP2" value="5" min="1" oninput="runSimCalc()">
+              </div>
             </div>
           </div>
-          <div class="result-box">
-            <div style="font-size: 0.875rem; color: var(--text-muted);">Требуемое количество лекарства (int):</div>
-            <div class="result-val" id="medResult">11 220 ед.</div>
-          </div>
-          <div class="formula-badge">
-            total = param1 * param2 * treat_coeff * qty * (1 + defect_rate)
+
+          <div class="calc-panel">
+            <h3 style="margin-bottom: 0.75rem; font-size: 1.1rem;">Результат расчета потребности</h3>
+            <div class="res-block">
+              <div style="font-size: 0.85rem; color: #64748b;">Требуемый объем с учетом брака:</div>
+              <div class="res-val" id="simResultVal">11 220 ед.</div>
+              <div id="simDetailVal" style="font-size: 0.82rem; color: #475569; margin-top: 0.5rem;">
+                Расход на 1 пациента: 1 100 ед. | Брак: 2.0%
+              </div>
+            </div>
+            <div style="margin-top: 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; background: #0f172a; color: #38bdf8; padding: 0.6rem 0.85rem; border-radius: 6px;">
+              total = param1 * param2 * treat_coeff * qty * (1 + defect_rate)
+            </div>
           </div>
         </div>
-      </section>
+      </div>
     </div>
 
-    <!-- Модуль 1: Архитектура БД -->
+    <!-- Инструкция по локальному запуску -->
     <section class="card">
-      <h2>🗄️ Модуль 1: Структура базы данных (3-я нормальная форма)</h2>
-      <p style="margin-bottom: 0.5rem;">База данных разработана с обеспечением ссылочной целостности и отсутствием транзитивных зависимостей:</p>
-      <table>
-        <thead>
-          <tr>
-            <th>Таблица</th>
-            <th>Первичный ключ</th>
-            <th>Внешние ключи (FK)</th>
-            <th>Описание сущности</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td><code>patients</code></td><td><code>patient_id</code></td><td><code>gender_id -> genders</code></td><td>Картотека пациентов с уникальным полисом ОМС</td></tr>
-          <tr><td><code>genders</code></td><td><code>gender_id</code></td><td>—</td><td>Справочник полов (Мужской, Женский)</td></tr>
-          <tr><td><code>doctors</code></td><td><code>doctor_id</code></td><td><code>specialization_id -> spec.</code></td><td>Реестр врачей и номера кабинетов</td></tr>
-          <tr><td><code>specializations</code></td><td><code>specialization_id</code></td><td>—</td><td>Справочник специализаций врачей</td></tr>
-          <tr><td><code>appointments</code></td><td><code>appointment_id</code></td><td><code>patient_id, doctor_id</code></td><td>Журнал приёмов, диагнозов и истории лечения</td></tr>
-          <tr><td><code>partners</code></td><td><code>partner_id</code></td><td>—</td><td>Фармацевтические компании и поставщики</td></tr>
-          <tr><td><code>treatment_types</code></td><td><code>treatment_type_id</code></td><td>—</td><td>Типы лечения и коэффициенты (К)</td></tr>
-          <tr><td><code>material_types</code></td><td><code>material_type_id</code></td><td>—</td><td>Типы препаратов и процент потерь (брака)</td></tr>
-          <tr><td><code>medicine_deliveries</code></td><td><code>delivery_id</code></td><td><code>partner_id, material_type_id</code></td><td>Журнал поступлений медикаментов от партнеров</td></tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- Запуск и тесты -->
-    <section class="card">
-      <h2>⚡ Инструкция по запуску и тестам (.NET 10)</h2>
-      <pre style="background: #0f172a; color: #f8fafc; padding: 1.25rem; border-radius: 8px; overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; line-height: 1.5;">
-# 1. Запуск автоматических тестов xUnit (37 тестов):
-cd "C:\Вариант 2\PolyclinicSolution"
-dotnet test
-
-# 2. Сборка решения:
-dotnet build
-
-# 3. Запуск настольного WPF приложения:
-dotnet run --project Polyclinic.UI
-      </pre>
+      <h2>🚀 Запуск готового настольного приложения (Desktop WPF)</h2>
+      <p style="margin-bottom: 1rem;">
+        Для запуска полноценной десктопной версии системы на компьютере клиента подготовлен файл в один клик:
+      </p>
+      <div style="background: #0f172a; color: #f8fafc; padding: 1.25rem; border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; margin-bottom: 1rem;">
+        C:\Вариант 2\Запустить_Поликлиника.bat
+      </div>
+      <p style="color: var(--text-muted); font-size: 0.9rem;">
+        Приложение не требует настройки СУБД или прав администратора — локальная база данных SQLite развертывается и инициализируется на лету.
+      </p>
     </section>
   </main>
 
+  <!-- МОДАЛЬНОЕ ОКНО: ДОБАВЛЕНИЕ ПАЦИЕНТА -->
+  <div id="addPatientModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title">Добавление нового пациента</div>
+        <button onclick="closeAddPatientModal()" style="background:none; border:none; font-size:1.25rem; cursor:pointer;">✕</button>
+      </div>
+      <form onsubmit="handlePatientSubmit(event)">
+        <div class="form-row">
+          <label>ФИО пациента: *</label>
+          <input type="text" id="mFio" required placeholder="Иванов Петр Сергеевич">
+        </div>
+        <div class="form-row">
+          <label>Дата рождения: *</label>
+          <input type="date" id="mBirth" required value="1995-06-15" onchange="validateBirth()">
+          <div id="mBirthHint" class="hint"></div>
+        </div>
+        <div class="form-row">
+          <label>Пол: *</label>
+          <select id="mGender">
+            <option value="Мужской">Мужской</option>
+            <option value="Женский">Женский</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Номер полиса ОМС (16 цифр): *</label>
+          <input type="text" id="mPolicy" maxlength="16" placeholder="7777888899990000" oninput="validatePolicy()">
+          <div id="mPolicyHint" class="hint warn">Осталось цифр: 16</div>
+        </div>
+        <div class="form-row">
+          <label>Телефон: *</label>
+          <input type="text" id="mPhone" placeholder="+7 (999) 123-45-67">
+        </div>
+        <div class="form-row">
+          <label>Email: *</label>
+          <input type="email" id="mEmail" placeholder="patient@mail.ru">
+        </div>
+        <div class="form-row">
+          <label>Адрес проживания: *</label>
+          <input type="text" id="mAddress" placeholder="г. Москва, ул. Ленина, д. 5, кв. 12">
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1rem;">
+          <button type="button" class="btn btn-secondary" onclick="closeAddPatientModal()">Отмена</button>
+          <button type="submit" class="btn btn-primary">Сохранить в базу</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- МОДАЛЬНОЕ ОКНО: ИСТОРИЯ ПРИЁМОВ -->
+  <div id="historyModal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 680px;">
+      <div class="modal-header">
+        <div class="modal-title" id="histTitle">История приёмов пациента</div>
+        <button onclick="closeHistoryModal()" style="background:none; border:none; font-size:1.25rem; cursor:pointer;">✕</button>
+      </div>
+      <div id="histContent">
+        <!-- Rendered via JS -->
+      </div>
+      <div style="display: flex; justify-content: flex-end; margin-top: 1.25rem;">
+        <button class="btn btn-secondary" onclick="closeHistoryModal()">Закрыть</button>
+      </div>
+    </div>
+  </div>
+
   <footer>
-    <p>Информационная система «Поликлиника» | Вариант № 2 | GitHub Pages</p>
+    <p>МИС «Поликлиника» — Демонстрационный проект (Вариант № 2) | GitHub Pages</p>
   </footer>
 
   <script>
-    function calculateDiscount() {
-      const visits = parseInt(document.getElementById('visitsInput').value) || 0;
-      const baseCost = parseFloat(document.getElementById('baseCostInput').value) || 0;
+    // State of Patients
+    let patients = [
+      { id: 1, fio: "Сидоров Алексей Михайлович", birth: "12.04.1985", gender: "Мужской", policy: "1111222233334444", phone: "+7 (916) 123-45-67", visits: 2, discount: 0,
+        history: [
+          { date: "10.02.2026", doctor: "Иванов С.П. (Терапевт)", diag: "ОРВИ легкой степени", cost: "1 500 ₽", final: "1 500 ₽" },
+          { date: "15.05.2026", doctor: "Иванов С.П. (Терапевт)", diag: "Клиническое выздоровление", cost: "1 200 ₽", final: "1 200 ₽" }
+        ]
+      },
+      { id: 2, fio: "Ковалева Мария Ивановна", birth: "25.08.1992", gender: "Женский", policy: "2222333344445555", phone: "+7 (926) 234-56-78", visits: 5, discount: 5,
+        history: [
+          { date: "14.01.2026", doctor: "Смирнова Е.В. (Кардиолог)", diag: "Тахикардия синусовая", cost: "2 000 ₽", final: "2 000 ₽" },
+          { date: "20.03.2026", doctor: "Смирнова Е.В. (Кардиолог)", diag: "Артериальная гипертензия I ст.", cost: "1 800 ₽", final: "1 800 ₽" },
+          { date: "11.06.2026", doctor: "Иванов С.П. (Терапевт)", diag: "Аллергический ринит", cost: "1 500 ₽", final: "1 500 ₽" },
+          { date: "05.08.2026", doctor: "Смирнова Е.В. (Кардиолог)", diag: "Стабилизация АД", cost: "1 800 ₽", final: "1 710 ₽ (скидка 5%)" },
+          { date: "18.10.2026", doctor: "Васильев А.Н. (Офтальмолог)", diag: "Миопия слабой степени", cost: "1 600 ₽", final: "1 520 ₽ (скидка 5%)" }
+        ]
+      },
+      { id: 3, fio: "Морозов Дмитрий Сергеевич", birth: "03.11.1978", gender: "Мужской", policy: "3333444455556666", phone: "+7 (903) 345-67-89", visits: 10, discount: 10,
+        history: [
+          { date: "10.01.2026", doctor: "Кузнецов М.А. (Невролог)", diag: "Остеохондроз поясничный", cost: "2 200 ₽", final: "2 200 ₽" },
+          { date: "30.08.2026", doctor: "Попова О.Д. (Хирург)", diag: "Артроз сустава (улучшение)", cost: "2 000 ₽", final: "1 800 ₽ (скидка 10%)" },
+          { date: "05.11.2026", doctor: "Иванов С.П. (Терапевт)", diag: "Астенический синдром", cost: "1 500 ₽", final: "1 350 ₽ (скидка 10%)" }
+        ]
+      },
+      { id: 4, fio: "Новикова Анна Павловна", birth: "18.02.2001", gender: "Женский", policy: "4444555566667777", phone: "+7 (915) 456-78-90", visits: 0, discount: 0, history: [] },
+      { id: 5, fio: "Федоров Игорь Владимирович", birth: "30.07.1965", gender: "Мужской", policy: "5555666677778888", phone: "+7 (925) 567-89-01", visits: 16, discount: 15,
+        history: [
+          { date: "05.12.2025", doctor: "Иванов С.П. (Терапевт)", diag: "Острый бронхит", cost: "1 500 ₽", final: "1 500 ₽" },
+          { date: "20.10.2026", doctor: "Иванов С.П. (Терапевт)", diag: "Диспансеризация", cost: "1 500 ₽", final: "1 350 ₽ (скидка 10%)" },
+          { date: "12.11.2026", doctor: "Иванов С.П. (Терапевт)", diag: "Осмотр биохимии", cost: "1 500 ₽", final: "1 275 ₽ (скидка 15%)" }
+        ]
+      }
+    ];
 
-      let discount = 0;
-      if (visits < 0) {
-        document.getElementById('discountResult').innerText = "Ошибка";
-        return;
-      } else if (visits <= 3) {
-        discount = 0;
-      } else if (visits <= 7) {
-        discount = 5;
-      } else if (visits <= 15) {
-        discount = 10;
+    function renderPatients(filter = "") {
+      const tbody = document.getElementById("patientsTableBody");
+      tbody.innerHTML = "";
+      const term = filter.toLowerCase().trim();
+
+      const filtered = patients.filter(p => 
+        p.fio.toLowerCase().includes(term) ||
+        p.policy.includes(term) ||
+        p.phone.includes(term)
+      );
+
+      filtered.forEach(p => {
+        let pillClass = "pill-0";
+        if (p.discount === 5) pillClass = "pill-5";
+        if (p.discount === 10) pillClass = "pill-10";
+        if (p.discount === 15) pillClass = "pill-15";
+
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td><strong>${p.id}</strong></td>
+          <td><strong>${p.fio}</strong></td>
+          <td>${p.birth}</td>
+          <td>${p.gender}</td>
+          <td><code>${p.policy}</code></td>
+          <td>${p.phone}</td>
+          <td>${p.visits} виз.</td>
+          <td><span class="pill ${pillClass}">${p.discount}%</span></td>
+          <td>
+            <button class="btn btn-secondary" style="padding: 0.35rem 0.65rem; font-size: 0.78rem;" onclick="viewHistory(${p.id})">📋 Приёмы</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function filterPatients() {
+      const q = document.getElementById("patientSearch").value;
+      renderPatients(q);
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+      event.target.classList.add("active");
+      document.getElementById(tabId).classList.add("active");
+    }
+
+    // Modal Add Patient
+    function openAddPatientModal() {
+      document.getElementById("addPatientModal").classList.add("open");
+    }
+    function closeAddPatientModal() {
+      document.getElementById("addPatientModal").classList.remove("open");
+    }
+
+    function validatePolicy() {
+      const val = document.getElementById("mPolicy").value.trim();
+      const hint = document.getElementById("mPolicyHint");
+      if (val.length === 16 && /^\d{16}$/.test(val)) {
+        hint.innerText = "✓ Номер полиса корректен (16 цифр)";
+        hint.className = "hint ok";
       } else {
-        discount = 15;
+        hint.innerText = `Осталось ввести цифр: ${Math.max(0, 16 - val.length)} из 16`;
+        hint.className = "hint warn";
       }
-
-      const finalCost = baseCost * (1 - discount / 100);
-      document.getElementById('discountResult').innerText = discount + "%";
-      document.getElementById('finalCostResult').innerText = finalCost.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " ₽";
     }
 
-    function calculateMedicine() {
-      const coeff = parseFloat(document.getElementById('treatmentTypeSelect').value);
-      const defect = parseFloat(document.getElementById('materialTypeSelect').value);
-      const qty = parseInt(document.getElementById('qtyInput').value) || 0;
-      const p1 = parseFloat(document.getElementById('p1Input').value) || 0;
-      const p2 = parseFloat(document.getElementById('p2Input').value) || 0;
+    function validateBirth() {
+      const val = new Date(document.getElementById("mBirth").value);
+      const hint = document.getElementById("mBirthHint");
+      if (val > new Date()) {
+        hint.innerText = "⚠ Дата рождения не может быть в будущем!";
+        hint.className = "hint warn";
+      } else {
+        hint.innerText = "";
+      }
+    }
 
-      if (qty <= 0 || p1 <= 0 || p2 <= 0) {
-        document.getElementById('medResult').innerText = "-1 (Ошибка)";
+    function handlePatientSubmit(e) {
+      e.preventDefault();
+      const fio = document.getElementById("mFio").value.trim();
+      const birth = document.getElementById("mBirth").value;
+      const gender = document.getElementById("mGender").value;
+      const policy = document.getElementById("mPolicy").value.trim();
+      const phone = document.getElementById("mPhone").value.trim();
+
+      if (policy.length !== 16 || !/^\d{16}$/.test(policy)) {
+        alert("Ошибка валидации: номер полиса ОМС должен состоять ровно из 16 цифр!");
         return;
       }
 
-      const materialPerUnit = p1 * p2 * coeff;
-      const total = materialPerUnit * qty * (1 + defect);
-      const result = Math.floor(total);
+      const newId = patients.length + 1;
+      const parts = birth.split("-");
+      const fmtBirth = `${parts[2]}.${parts[1]}.${parts[0]}`;
 
-      document.getElementById('medResult').innerText = result.toLocaleString('ru-RU') + " ед.";
+      patients.unshift({
+        id: newId,
+        fio: fio,
+        birth: fmtBirth,
+        gender: gender,
+        policy: policy,
+        phone: phone,
+        visits: 0,
+        discount: 0,
+        history: []
+      });
+
+      alert(`Пациент «${fio}» успешно зарегистрирован в базе данных! Список обновлен без перезапуска.`);
+      closeAddPatientModal();
+      renderPatients();
     }
 
-    calculateDiscount();
-    calculateMedicine();
+    // Modal History
+    function viewHistory(id) {
+      const p = patients.find(item => item.id === id);
+      if (!p) return;
+
+      document.getElementById("histTitle").innerText = `История приёмов: ${p.fio}`;
+      const c = document.getElementById("histContent");
+      c.innerHTML = `
+        <div style="background:#f1f5f9; padding:0.85rem 1rem; border-radius:8px; margin-bottom:1rem; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <strong>Полис ОМС:</strong> <code>${p.policy}</code> | <strong>Телефон:</strong> ${p.phone}
+          </div>
+          <div>
+            <span class="pill pill-${p.discount}" style="font-size:0.9rem; padding:0.35rem 0.75rem;">Скидка: ${p.discount}% (${p.visits} визитов)</span>
+          </div>
+        </div>
+      `;
+
+      if (p.history.length === 0) {
+        c.innerHTML += `<p style="color:#64748b; text-align:center; padding:1.5rem 0;">Записей о приёмах за последние 12 месяцев пока нет.</p>`;
+      } else {
+        let t = `<table><thead><tr><th>Дата</th><th>Врач</th><th>Диагноз</th><th>Оплата</th></tr></thead><tbody>`;
+        p.history.forEach(h => {
+          t += `<tr>
+            <td>${h.date}</td>
+            <td><strong>${h.doctor}</strong></td>
+            <td>${h.diag}</td>
+            <td><strong style="color:var(--primary);">${h.final}</strong></td>
+          </tr>`;
+        });
+        t += `</tbody></table>`;
+        c.innerHTML += t;
+      }
+
+      document.getElementById("historyModal").classList.add("open");
+    }
+    function closeHistoryModal() {
+      document.getElementById("historyModal").classList.remove("open");
+    }
+
+    // Simulator Calculator (Module 4)
+    function runSimCalc() {
+      const c = parseFloat(document.getElementById("simTreatment").value);
+      const d = parseFloat(document.getElementById("simMaterial").value);
+      const q = parseInt(document.getElementById("simQty").value) || 0;
+      const p1 = parseFloat(document.getElementById("simP1").value) || 0;
+      const p2 = parseFloat(document.getElementById("simP2").value) || 0;
+
+      if (q <= 0 || p1 <= 0 || p2 <= 0) {
+        document.getElementById("simResultVal").innerText = "-1 (Ошибка)";
+        return;
+      }
+
+      const perUnit = p1 * p2 * c;
+      const total = perUnit * q * (1 + d);
+      const res = Math.floor(total);
+
+      document.getElementById("simResultVal").innerText = res.toLocaleString("ru-RU") + " ед.";
+      document.getElementById("simDetailVal").innerText = `Расход на 1 пациента: ${(perUnit).toLocaleString("ru-RU")} ед. | Брак: ${(d*100).toFixed(1)}%`;
+    }
+
+    // Init on Load
+    renderPatients();
+    runSimCalc();
   </script>
 </body>
 </html>
